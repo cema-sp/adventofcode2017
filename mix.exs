@@ -11,7 +11,8 @@ defmodule AdventOfCode2017.Mixfile do
 
   defp deps do
     [
-      {:credo, "~> 0.8", only: [:dev, :test], runtime: false}
+      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+      {:dogma, "~> 0.1", only: :dev},
     ]
   end
 end
