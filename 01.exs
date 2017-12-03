@@ -18,8 +18,8 @@ defmodule Puzzle do
 
   defp sum_("", ""), do: 0
   defp sum_(string, shifted) do
-    { a, rest_string } = String.next_grapheme(string)
-    { b, rest_shifted } = String.next_grapheme(shifted)
+    {a, rest_string} = String.next_grapheme(string)
+    {b, rest_shifted} = String.next_grapheme(shifted)
 
     inc = if a == b, do: String.to_integer(a), else: 0
     inc + sum_(rest_string, rest_shifted)
@@ -128,7 +128,7 @@ if mode == "test" do
     end
   end
 else
-  data = File.read!("01.txt") |> String.trim_trailing
+  data = "01.txt" |> File.read! |> String.trim_trailing
   sum = Puzzle.sum(data)
   sum_mid = Puzzle.sum_mid(data)
   IO.puts "The sum is: #{sum}"

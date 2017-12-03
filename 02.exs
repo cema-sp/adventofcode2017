@@ -6,8 +6,8 @@ defmodule Puzzle do
       |> String.split("\n", trim: true)
       |> Enum.map(&minmax/1)
       |> Enum.map(
-           fn { nil, nil } -> 0
-              { min, max } -> max - min
+           fn {nil, nil} -> 0
+              {min, max} -> max - min
            end
          )
       |> Enum.sum
@@ -20,24 +20,24 @@ defmodule Puzzle do
       |> String.split("\n", trim: true)
       |> Enum.map(&divides/1)
       |> Enum.map(
-           fn [{ nil, nil }] -> 0
-              [{ divided, divider }] -> div(divided, divider)
+           fn [{nil, nil}] -> 0
+              [{divided, divider}] -> div(divided, divider)
            end
          )
       |> Enum.sum
   end
 
-  defp minmax(""), do: { nil, nil }
+  defp minmax(""), do: {nil, nil}
   defp minmax(row) do
     row
       |> String.split
       |> Enum.map(&String.to_integer/1)
       |> Enum.reduce(
-           { nil, nil },
+           {nil, nil},
            fn(digit, acc) ->
              cond do
                is_nil(elem(acc, 0)) ->
-                 { digit, digit }
+                 {digit, digit}
                digit < elem(acc, 0) ->
                  put_elem(acc, 0, digit)
                digit > elem(acc, 1) ->
@@ -49,14 +49,14 @@ defmodule Puzzle do
          )
   end
 
-  defp divides(""), do: { nil, nil }
+  defp divides(""), do: {nil, nil}
   defp divides(row) do
     ints = row |> String.split |> Enum.map(&String.to_integer/1)
     for a <- ints,
         b <- ints,
         a > b,
         rem(a, b) == 0,
-        do: { a, b }
+        do: {a, b}
   end
 end
 
@@ -105,7 +105,7 @@ if mode == "test" do
     end
   end
 else
-  data = File.read!("02.txt") |> String.trim_trailing
+  data = "02.txt" |> File.read! |> String.trim_trailing
   checksum = Puzzle.checksum(data)
   checksum_div = Puzzle.checksum_div(data)
   IO.puts "The checksum is: #{checksum}"
